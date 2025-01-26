@@ -1,0 +1,45 @@
+.darkmode {
+    body {
+        background-color:black;
+        color:salmon;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: xx-large;
+    }
+    .title {
+        text-align: center;
+    }
+    #part2 {
+        background-color: darkgrey;
+        color: aqua;
+    }
+}
+.lightmode {
+    body {
+        background-color:rgb(255, 255, 255);
+        color:salmon;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: xx-large;
+    }
+    .title {
+        text-align: center;
+    }
+    #part2 {
+        background-color: aqua;
+        color: lightgray;
+    }
+}
+.grayscale {
+    body {
+        background-color:darkgrey;
+        color:rgb(255, 255, 255);
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: xx-large;
+    }
+    .title {
+        text-align: center;
+    }
+    #part2 {
+        background-color: rgb(46, 46, 46);
+        color: lightgray;
+    }
+}
