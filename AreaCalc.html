@@ -10,18 +10,37 @@
             font-family: Arial, Helvetica, sans-serif;
             font-size: xx-large;
         }
+        .output {
+           font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+        }
     </style>
 </head>
 <body>
 <script>
-function calc(){
-    const Radius = document.getElementById("usernum").value;
+function calcc(){
+    const Radius = document.getElementById("userr").value;
     let result = Math.PI * Radius ** 2 ;
-}
+    document.getElementById("areao").innerHTML = "Area:" + result;
+    }
+function calcv(){
+    const Radius = document.getElementById("userr1").value;
+    const Height = document.getElementById("userh").value;
+    let area = Math.PI * Radius ** 2 ;
+    let result = area * Height;
+    document.getElementById("volumeo").innerHTML = "Volume:" + result;
+    }
 </script>
-<h5>Circle Calculator:</h5>
-<input type="number" id="usernum" placeholder="Radius" min="0" />
-<input type="button" value="Get Area" onclick="calc()" />
-<img src="Images/AOAC.jpg">
+<h4>Circle Calculator:</h4>
+<p id="areao" class="output">Area:</p>  
+<input type="number" id="userr" placeholder="Radius" min="0" />
+<input type="button" value="Get Area" onclick="calcc()" />
+<img src="AOAC.jpg">
+<hr>
+<h4>Cylinder Calculator:</h4>
+<p id="volumeo" class="output">Volume:</p>
+<input type="number" id="userr1" placeholder="Radius" min="0" />
+<input type="number" id="userh" placeholder="height" min="0" />
+<input type="button" value="Get Area" onclick="calcv()"/> 
+<img src="VOLC.png">
 </body>
 </html>
