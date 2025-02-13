@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>
+AVGCALC
+</title> 
+<script>
+let datas=[]
+function addData(){
+    let datap = document.getElementById("datat").value;
+    if (isNaN(parseFloat(datap)) == true){
+    alert("not a number")
+    }
+    else{
+    datas.push(parseFloat(datap));
+    document.getElementById("RESULTSDATA").innerHTML = datas;
+    }
+}
+function removeData(){
+    let datap = document.getElementById("datat").value;
+    if (isNaN(parseFloat(datap)) == true){
+    alert("not a number")
+    }
+    else{       
+    let index = datas.indexOf(parseFloat(datap))
+    if (index === -1) {
+    alert("not in dataset")
+    return;
+    }
+    datas.splice(index, 1);
+    document.getElementById("RESULTSDATA").innerHTML = datas;
+    }
+}
+function avg(){
+    numer = 0 
+    for (let i = 0; i < parseFloat(datas.length); i++){
+    added = parseFloat(datas[i])
+    numer += parseFloat(added)
+    }
+    let aver = numer/parseFloat(datas.length)
+    document.getElementById("meanie").innerHTML = "Average:" + aver;
+}
+</script>
+</head>
+<body>
+<h1>DATA ENTRY</h1>
+<div>
+<input type = "number" id="datat" >
+<input type = "button" value="Add data" onclick="addData()">
+<input type = "button" value="Remove data" onclick="removeData()">
+</div>
+<input type = "button" onclick="avg()" value="Calculate Mean">
+<h3>Current Dataset</h3>
+<p id="RESULTSDATA"></p>
+<h3>Current Mean</h3>
+<p id="meanie">Average:</p>
+</body>
+</html>
