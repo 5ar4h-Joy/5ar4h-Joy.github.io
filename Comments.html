@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.forms input {
+    display: flex;
+    align-items: center;
+}
+.forms label {
+    display: flex;
+}
+</style>
+<title>
+</title>
+<script>
+const saninputs = []
+let stateUN = false;
+let state = false;
+let filled = false;
+function submit(){
+if (state == true && stateUN == true){
+filled = true
+}
+else{
+alert('Please Include Username and Password')
+filled = false
+}                                                                                                    
+}
+function submitall(){
+submit()
+if (filled == true){
+const allinputs = [document.getElementById("name").value,document.getElementById("phone").value, document.getElementById("email").value, document.getElementById("comments").value, document.getElementById("username").value, document.getElementById("password").value]
+allinputs.forEach((element) => {let sanelm = sanitize(element)
+saninputs.push(sanelm)
+console.log(saninputs)
+})}}
+function sanitize(unsanned){
+const replacements = {
+"<":'&lt;',
+">":'&gt;',
+"&":'&amp;',
+'"':'&quot;',
+"'":'&apos;',
+}
+const pattern = /[&<>"'/]/ig;
+console.log(unsanned)
+let sanned = unsanned.replace(pattern, (match) => (replacements[match]));
+console.log(sanned)
+return sanned
+}
+function UNvalidation(){
+let y = document.getElementById('username').value;
+let outputm = ""; 
+switch (true) {
+case (y === ""): 
+outputm = "Please Enter Username"
+stateUN = false;
+break;
+case (/[!@#$%^&*(),.?":{}|<>/]/.test(y)):  
+outputm = "Username must only contain letters, numbers, and underscores.";
+stateUN = false;
+break;
+default:
+outputm = "Valid Username!";
+stateUN = true;
+}
+document.getElementById('validUN?').innerHTML = outputm;
+}
+function PWvalidation() {
+let x = document.getElementById('password').value;
+let message = "";
+switch (true) {
+case (x === ""):
+message = "Please Enter Password";
+state = false;
+break;
+case (x.length < 8):
+message = "Password too short (8 characters or more)";
+state = false;
+break;
+case (!/[A-Z]/.test(x)):
+message = "Password must contain a capital letter";
+state = false;
+break;
+case (!/[a-z]/.test(x)):
+message = "Password must contain a lowercase letter";
+state = false;
+break;
+case (!/[!@#$%^&*(),.?":{}|<>]/.test(x)):  
+message = "Password must contain a special character";
+break;
+default:
+message = "Valid password!";
+state = true;
+}
+document.getElementById('validPW?').innerHTML = message;
+}
+</script>
+</head>
+<body>
+<H1>
+Comments/Feedback
+</H1>
+<HR>
+<form>
+<div class = "forms">
+<label for = "name">Name</label>
+<input type = "text" id = "name" name = "name" pattern = "[a-zA-Z\s]+" required >
+</div>
+<div class = "forms">
+<label for = "phone">Phone</label>
+<input type = "tel" id = "phone" name = "phone" pattern = "[0-9]{10}"
+</div>
+<div class = "forms">
+<label for = "email">Email</label>
+<input type = "email" id = "email" name = "email">
+</div>
+<div class = "forms">
+<label for = "comments">Comments </label>
+<textarea id = "comments" name= "comments" required></textarea>
+</div>
+<div class = "forms">
+<label for = "username">Username</label>
+<input type = "text" id = "username" name = "username" oninput="UNvalidation()">
+<p id = "validUN?">Please Enter Username</p>
+</div>
+<div class = "forms">
+<label for = "password">Password</label>
+<input type = "text" id = "password" password = "password" oninput="PWvalidation()">
+<p id = "validPW?">Please Enter Password</p>
+</div>
+<input type = "submit" id = "submit" name = "submit" onclick="submitall()">
+</form>
+</body>
+</html> 
