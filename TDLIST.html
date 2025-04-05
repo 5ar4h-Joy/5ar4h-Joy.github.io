@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html id="theme">
+
+<head>
+        <title>
+                TODO List
+        </title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="mystyle.css">
+        <script>
+                function lightmode() {
+                        document.getElementById("theme").className = "lightmode";
+                        document.cookie = "colors=darkmode; expires = Dec 15 1989 12:00:00 UTC; path=/";
+                        document.cookie = "colors=lightmode; expires Dec 15 9999 12:00:00 UTC; path=/";
+                }
+                function darkmode() {
+                        document.getElementById("theme").className = "darkmode";
+                        document.cookie = "colors=darkmode; expires Dec 15 1989 12:00:00 UTC; path=/";
+                        document.cookie = "colors=darkmode; expires Dec 15 9999 12:00:00 UTC; path=/";
+                }
+                function grayscale() {
+                        document.getElementById("theme").className = "grayscale";
+                        document.cookie = "colors=darkmode; expires = Dec 15 1989 12:00:00 UTC; path=/";
+                        document.cookie = "colors=grayscale; expires = Dec 15 9999 12:00:00 UTC; path=/";
+                }
+                function themeload(){
+                        if (document.cookie.includes('colors')){
+                        let themeS = decodeURIComponent(document.cookie)
+                        let themeSP = themeS.split("=")     
+                        document.getElementById("theme").className = themeSP[1]
+                        }
+                        else {
+                        document.getElementById("theme").className = "darkmode";
+                        }
+                }       
+                let todolist = []
+                let tadded = 0
+                let jsonLIST = []
+                function tdload(){
+                if (localStorage.length > 0){
+                jsonLIST.push(localStorage.getItem('tdlist'))
+                jsonstring = jsonLIST.toString()
+                console.log(jsonstring)
+                jsonstringsplit = jsonstring.split(',')
+                console.log(jsonstringsplit)
+                for (i = 0; i > jsonstringsplit.length;i++){
+                jsonLIST.push(jsonstringsplit.getItem(i))
+                }
+                todolist = jsonstringsplit
+                document.getElementById('TDLIST').innerHTML = todolist;
+                reloadlist()
+                }
+                }
+                function reloadlist() {
+                        cleanlist = todolist.join("<br>")
+                        document.getElementById('TDLIST').innerHTML = cleanlist;
+                        document.getElementById('Add').value =""
+                        document.getElementById('Remove').value =""
+                        sessionStorage.setItem("Tasks Added", tadded)
+                        document.getElementById("tasksadded").innerHTML = "Tasks Added:" + tadded;
+                        console.log(todolist)
+                }
+                function addlistitem() {
+                        let addeditem = document.getElementById('Add').value
+                        todolist.push(addeditem)
+                        tadded = tadded + 1
+                        let slot = jsonLIST.length + 1
+                        jsonLIST.push({slot, addeditem})
+                        localStorage.setItem('tdlist',todolist)
+                        reloadlist()
+                        console.log(jsonLIST)
+                }       
+                function removelistitem() {
+                        let removeditem = document.getElementById('Remove').value
+                        let index = todolist.indexOf(removeditem)
+                        if (index === -1) {
+                                alert("Not on your list silly!")
+                                return;
+                        }
+                        else {
+                                todolist.splice(index, 1)
+                        }
+                        tadded = tadded - 1    
+                        let indexJS = jsonLIST.indexOf(removeditem)
+                        jsonLIST.splice(indexJS, 1)
+                        reloadlist()
+                        console.log(jsonLIST)
+                        localStorage.setItem('tdlist', todolist)
+                }
+                async function dailyquote(url){
+                const response = await fetch (url);
+                let quotedata = await response.json();   
+                let quote = quotedata.content;
+                document.getElementById("inspire").innerHTML = 'Fortune from the Wise:' + quote;
+                }
+        </script>
+</head>
+
+<body>
+        <div>
+                <button value="lightmode" onclick="lightmode();">
+                        <label for="lightmode">☀️</label>
+                        <button value="grayscale" onclick="grayscale();">
+                                <label for="grayscale">🌙</label>
+                                <button value="darkmode" onclick="darkmode();">
+                                        <label for="darkmodemode">🌑</label>
+        </div>
+        <marquee id="inspire">QOTD</marquee>
+        <div>
+                <h1>To Do List:</h1>
+                <p id="TDLIST"></p>
+        </div>
+        <p id="tasksadded">Tasks Added:</p>
+        <div>
+                <h1>Edit List Items:</h1>
+                <form>
+                        <Label for="Add">Add List Item:</Label>
+                        <input type="text" id="Add" name="Add">
+                        <input type="button" value="Submit" onclick="addlistitem()">
+                        <label for="Remove">Remove List Item:</label>
+                        <input type="text" id="Remove" name="Remove">
+                        <input type="button" value="Submit" onclick="removelistitem()">
+                </form>
+        </div>
+</body>
+<script>
+        tdload();
+        dailyquote("https://api.quotable.io/random");
+        themeload();
+</script>
+
+</html>
