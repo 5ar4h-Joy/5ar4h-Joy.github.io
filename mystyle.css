@@ -1,45 +1,80 @@
 .darkmode {
     body {
-        background-color:black;
-        color:salmon;
+        background-color: black;
+        color: salmon;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         font-size: xx-large;
     }
+
     .title {
         text-align: center;
     }
+
     #part2 {
         background-color: darkgrey;
         color: aqua;
     }
+
+    input {
+        display: flex;
+        align-items: center;
+    }
+
+    label {
+        display: flex;
+    }
 }
+
 .lightmode {
     body {
-        background-color:rgb(255, 255, 255);
-        color:salmon;
+        background-color: rgb(255, 255, 255);
+        color: salmon;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         font-size: xx-large;
     }
+
     .title {
         text-align: center;
     }
+
     #part2 {
         background-color: aqua;
         color: lightgray;
     }
+
+    input {
+        display: flex;
+        align-items: center;
+    }
+
+    label {
+        display: flex;
+    }
 }
+
 .grayscale {
     body {
-        background-color:darkgrey;
-        color:rgb(255, 255, 255);
+        background-color: darkgrey;
+        color: rgb(255, 255, 255);
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         font-size: xx-large;
     }
+
     .title {
         text-align: center;
     }
+
     #part2 {
         background-color: rgb(46, 46, 46);
         color: lightgray;
+    }
+
+    input {
+        display: flex;
+        align-items: center;
+    }
+
+    label {
+        display: flex;
     }
 }
