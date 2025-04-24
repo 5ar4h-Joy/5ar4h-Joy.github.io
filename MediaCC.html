@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MEDIACC</title>
+</head>
+
+<body>
+<h1>Song Collection</h1>
+<div id="mediacont">
+
+</div>
+</body>
+<script>
+    let jsonLIST = [{ artistname: "OVERPADE", title: "STAMPEDE", genre: "Alt Rock", image: 'overpade.jpg' }, { artistname: "The Clash", title: "London Calling", genre: "Punk Rock", image: 'theclash.jpg' }, { artistname: "JID", title: "Raydar", genre: "Hip-Hop", image: 'jid.jpg' }]
+    let objLIST = []
+
+    let arrayV = []
+    jsonLIST.forEach(object => {
+        let stringv = JSON.stringify(object)
+        arrayV.push(stringv)
+    });
+
+    class songs {
+        #image
+        constructor(artistname, title, genre, image) {
+            this._name = artistname;
+            this._title = title;
+            this.genre = genre;
+            this.#image = image;
+        }
+
+        set name(artistname) {
+            this._name = artistname
+        }
+
+        get name() {
+            return this._name
+        }
+
+        set title(title) {
+            this._title = title
+        }
+
+        get title() {
+            return this._title
+        }
+
+        set genre(genre) {
+            if (typeof genre === 'string') {
+                this._genre = genre
+            }
+            else {
+                console.error("invalid genre")
+            }
+        }
+
+        get genre() {
+            return this._genre
+        }
+        set image(image) {
+            this.#image = image
+        }
+
+        get image() {
+            return this.#image
+        }
+
+        stringmeth() {
+            if (this.title == "STAMPEDE") {
+                return arrayV[0]
+            }
+            if (this.title == "Raydar") {
+                return arrayV[2]
+            }
+            if (this.title == "London Calling") {
+                return arrayV[1]
+            }
+        }
+
+        pagemeth() {
+            let container = document.getElementById("mediacont");
+            let card = document.createElement("div");
+            card.style.border = "1px solid #ccc";
+            card.style.padding = "10px";
+            card.style.margin = "10px";
+            card.style.width = "200px";
+            let img = document.createElement("img");
+            img.src = this.image;
+            img.style.width = "100%";
+            let title = document.createElement("h2");
+            title.innerText = this.title;
+            let artist = document.createElement("p");
+            artist.innerText = "Artist: " + this.name;
+            let genre = document.createElement("p");
+            genre.innerText = "Genre: " + this.genre;
+
+            card.appendChild(img);
+            card.appendChild(title);
+            card.appendChild(artist);
+            card.appendChild(genre);
+            container.appendChild(card);
+        }
+
+    }
+    jsonLIST.forEach(element => {
+        let song = new songs(element.artistname, element.title, element.genre, element.image);
+        console.log(song)
+        song.pagemeth();
+    });
+</script>
+</html>
